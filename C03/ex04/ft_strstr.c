@@ -1,43 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 17:29:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/30 21:03:43 by marvin           ###   ########.fr       */
+/*   Created: 2025/03/30 19:23:21 by marvin            #+#    #+#             */
+/*   Updated: 2025/03/30 20:59:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+/*#include <stdio.h>*/
 
-char	*ft_strncat(char *dest, char *src, unsigned int nb)
+char *ft_strstr(char *str, char *to_find)
 {
-	unsigned int	i;
-	unsigned int	y;
+	int	i;
+	int	y;
 
 	i = 0;
 	y = 0;
-
-	while (dest[i] != '\0')
+	if (to_find[0] == '\0') 
 	{
+		return (str);
+	}	
+	while(str[i])
+	{
+		if (str[i] == to_find[y])
+		{		
+			y++;
+			if (to_find[y] == '\0')
+			{
+				return (&str[i - y + 1]);
+			}	
+		}
+		else
+		{
+			y = 0;
+		}
 		i++;
 	}
-	while (y < nb && src[y] != '\0')
-	{
-		dest[i] = src[y];
-		y++;
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	return (NULL);
 }
 
 /*int	main(void)
 {
-	char	amg[50] = "Ton";
-	char	*cls = "zinc";
-	printf ("%s\n", ft_strncat(amg, cls, 2));
+	char *amg = "tufaiqfdsfaisuoi";
+	char *bit = "tonzinc";
+	printf("%s\n", ft_strstr(amg, bit));
 	return (0);
 }*/
