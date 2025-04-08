@@ -1,50 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 19:23:21 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/02 14:44:41 by egjika           ###   ########.fr       */
+/*   Created: 2025/04/02 12:24:16 by egjika            #+#    #+#             */
+/*   Updated: 2025/04/02 15:01:17 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-
-char	*ft_strstr(char *str, char *to_find)
+int	ft_fibonacci(int index)
 {
-	int	i;
-	int	y;
-
-	i = 0;
-	y = 0;
-	if (to_find[0] == '\0')
-		return (str);
-	while (str[i])
-	{
-		if (str[i] == to_find[y])
-		{
-			y++;
-			if (to_find[y] == '\0')
-			{
-				return (&str[i - y + 1]);
-			}
-		}
-		else
-		{
-			y = 0;
-		}
-		i++;
-	}
-	return (0);
+	if (index < 0)
+		return (-1);
+	if (index == 0)
+		return (0);
+	if (index == 1 || index == 2)
+		return (1);
+	return (ft_fibonacci(index - 1) + ft_fibonacci(index -2));
 }
 
-int	main(void)
+/*int	main(void)
 {
-	char *amg = "Helloguysfhdhdfthfudfsyh";
-	char *bit = "goy";
-	printf("%s\n", ft_strstr(amg, bit));
-	return (0);
-}
+	printf ("%d\n", ft_fibonacci(15));
+	return 0;
+}*/

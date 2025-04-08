@@ -1,50 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 19:23:21 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/02 14:44:41 by egjika           ###   ########.fr       */
+/*   Created: 2025/03/28 17:01:45 by egjika            #+#    #+#             */
+/*   Updated: 2025/03/29 16:25:13 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-
-char	*ft_strstr(char *str, char *to_find)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
-	int	y;
 
 	i = 0;
-	y = 0;
-	if (to_find[0] == '\0')
-		return (str);
-	while (str[i])
+	while (s1[i] && s2[i])
 	{
-		if (str[i] == to_find[y])
+		if (s1[i] != s2[i])
 		{
-			y++;
-			if (to_find[y] == '\0')
-			{
-				return (&str[i - y + 1]);
-			}
-		}
-		else
-		{
-			y = 0;
+			return (s1[i] - s2[i]);
 		}
 		i++;
 	}
+	if ((s1[i] == '\0' && s2[i] != '\0') || (s1[i] != '\0' && s2[i] == '\0'))
+		return (s1[i] - s2[i]);
 	return (0);
 }
 
-int	main(void)
+/*int	main()
 {
-	char *amg = "Helloguysfhdhdfthfudfsyh";
-	char *bit = "goy";
-	printf("%s\n", ft_strstr(amg, bit));
+	char *s = "tonzinc";
+	char *m = "tonsincgorszdinlorentre a laker";
+	printf("%d\n", ft_strcmp(s, m));
 	return (0);
-}
+}*/

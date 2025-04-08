@@ -19,7 +19,6 @@ char	*ft_strcat(char *dest, char *src)
 
 	i = 0;
 	y = 0;
-
 	while (dest[i] != '\0')
 	{
 		i++;

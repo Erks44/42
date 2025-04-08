@@ -1,50 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 19:23:21 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/02 14:44:41 by egjika           ###   ########.fr       */
+/*   Created: 2025/03/29 14:39:51 by egjika            #+#    #+#             */
+/*   Updated: 2025/03/29 16:28:56 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-
-char	*ft_strstr(char *str, char *to_find)
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	int	i;
-	int	y;
+	unsigned int	i;
 
 	i = 0;
-	y = 0;
-	if (to_find[0] == '\0')
-		return (str);
-	while (str[i])
+	while (i < n && s1[i] != '\0' && s2[i] != '\0')
 	{
-		if (str[i] == to_find[y])
-		{
-			y++;
-			if (to_find[y] == '\0')
-			{
-				return (&str[i - y + 1]);
-			}
-		}
-		else
-		{
-			y = 0;
-		}
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
 		i++;
 	}
+	if (i < n)
+		return (s1[i] - s2[i]);
 	return (0);
 }
 
-int	main(void)
+/*int	main()
 {
-	char *amg = "Helloguysfhdhdfthfudfsyh";
-	char *bit = "goy";
-	printf("%s\n", ft_strstr(amg, bit));
+	unsigned int	n = 3;
+	char *s = "tonzinc";
+	char *m = "tonsinc";
+	printf("%d\n", ft_strncmp(s, m, n));
 	return (0);
-}
+}*/
