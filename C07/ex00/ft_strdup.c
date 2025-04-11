@@ -6,29 +6,42 @@
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 15:23:02 by egjika            #+#    #+#             */
-/*   Updated: 2025/04/08 15:55:57 by egjika           ###   ########.fr       */
+/*   Updated: 2025/04/10 13:37:49 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*ft_strdup(char *src)
+int	ft_strlen(char *str)
 {
-	int		i;
-	char	*s;
+	int	i;
 
 	i = 0;
-	while (src[i])
+	while (str[i])
+	{
 		i++;
-	s = malloc(i + 1);
+	}
+	return (i);
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*dest;
+	int		i;
+	int		len;
+
+	len = ft_strlen(src);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
 	i = 0;
 	while (src[i])
 	{
-		s[i] = src[i];
+		dest[i] = src[i];
 		i++;
 	}
-	s[i] = '\0';
-	return (s);
+	dest[i] = '\0';
+	return (dest);
 }
 
 /*#include <stdio.h>

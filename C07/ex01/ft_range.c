@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 
 int	*ft_range(int min, int max)
 {
-	int	*val;
+	int	*tab;
 	int	i;
+	int	range;
 
-	i = 0;
 	if (min >= max)
-		return (0);
-	val = malloc((max - min) * sizeof(int));
-	if (val == NULL)
-		return (0);
-	while (min < max)
+		return (NULL);
+	range = max - min;
+	tab = (int *)malloc(sizeof(int) * range);
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (i < range)
 	{
-		val[i] = min;
-		min++;
+		tab[i] = min + i;
 		i++;
 	}
-	return (val);
+	return (tab);
 }
 
 /*int	main()
