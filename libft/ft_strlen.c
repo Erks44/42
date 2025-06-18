@@ -6,14 +6,14 @@
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:55:19 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/04 18:05:25 by egjika           ###   ########.fr       */
+/*   Updated: 2025/06/18 18:34:54 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+
+size_t	ft_strlen(const char *str)
 {
-	int	h;
-	int	result;
+	size_t	h;
 	h = 0;
 	while(str[h])
 	{
