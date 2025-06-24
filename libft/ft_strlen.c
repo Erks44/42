@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 17:55:19 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/18 18:34:54 by egjika           ###   ########.fr       */
+/*   Updated: 2025/06/19 18:10:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 size_t	ft_strlen(const char *str)
 {
 	size_t	h;
+
 	h = 0;
-	while(str[h])
+	while (str[h])
 	{
 		h++;
 	}
