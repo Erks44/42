@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:57:44 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:58:14 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+char	*ft_strcpy(char *s1, char *s2)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	int	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
 	i = 0;
-	while (i < n)
+	while (s2[i])
 	{
-		dest[i] = srce[i];
+		s1[i] = s2[i];
 		i++;
 	}
-	return (dst);
+	s1[i] = '\0';
+	return (s1);
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*dup;
+
+	dup = malloc(ft_strlen(src) + 1);
+	if (dup != NULL)
+	{
+		return (ft_strcpy(dup, src));
+	}
+	return (dup);
 }

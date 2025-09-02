@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:21:31 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:21:35 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	t_list	*new_list;
+	t_list	*new_obj;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		dest[i] = srce[i];
-		i++;
+		new_obj = ft_lstnew(f(lst->content));
+		if (!new_obj)
+		{
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_obj);
+		lst = lst->next;
 	}
-	return (dst);
+	return (new_list);
 }

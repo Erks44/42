@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 18:00:05 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:00:10 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	char			*res;
+	unsigned int	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	res = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!res)
 	{
-		dest[i] = srce[i];
+		return (NULL);
+	}
+	i = 0;
+	while (i < ft_strlen(s))
+	{
+		res[i] = (*f)(i, s[i]);
 		i++;
 	}
-	return (dst);
+	res[i] = 0;
+	return (res);
 }

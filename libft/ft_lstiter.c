@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:11:30 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:32:20 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	t_list	*tmp;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	tmp = lst;
+	while (tmp)
 	{
-		dest[i] = srce[i];
-		i++;
+		f(tmp->content);
+		tmp = tmp->next;
 	}
-	return (dst);
 }

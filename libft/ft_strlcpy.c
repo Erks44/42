@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:59:42 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:59:51 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	size_t	dlen;
+	size_t	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	dlen = 0;
+	while (src[dlen])
 	{
-		dest[i] = srce[i];
+		dlen++;
+	}
+	if (size == 0)
+	{
+		return (dlen);
+	}
+	i = 0;
+	while (src[i] && i < (size - 1))
+	{
+		dest[i] = src[i];
 		i++;
 	}
-	return (dst);
+	dest[i] = '\0';
+	return (dlen);
 }

@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:59:04 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:59:13 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	int		i;
+	int		j;
+	char	*str;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
 	i = 0;
-	while (i < n)
+	j = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		dest[i] = srce[i];
+		str[i] = s1[i];
 		i++;
 	}
-	return (dst);
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:13:17 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:33:40 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+t_list	*ft_lstlast(t_list *lst)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
-
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
-	{
-		dest[i] = srce[i];
-		i++;
-	}
-	return (dst);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

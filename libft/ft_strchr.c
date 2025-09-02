@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:57:13 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:57:19 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+char	*ft_strchr(const char *src, int c)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	int	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
 	i = 0;
-	while (i < n)
+	while (src[i])
 	{
-		dest[i] = srce[i];
+		if ((unsigned char)src[i] == (unsigned char)c)
+		{
+			return ((char *)&src[i]);
+		}
 		i++;
 	}
-	return (dst);
+	if (c == '\0')
+		return ((char *)&src[i]);
+	return (0);
 }

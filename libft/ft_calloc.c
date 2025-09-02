@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 16:57:50 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:04:05 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_calloc(size_t num, size_t size)
 {
+	unsigned char	*ptr;
+	size_t			total_size;
 	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	if (num && size > SIZE_MAX / num)
 	{
-		dest[i] = srce[i];
+		return (NULL);
+	}
+	total_size = num * size;
+	ptr = malloc(total_size);
+	if (!ptr)
+	{
+		return (NULL);
+	}
+	i = 0;
+	while (i < total_size)
+	{
+		ptr[i] = 0;
 		i++;
 	}
-	return (dst);
+	return (ptr);
 }

@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:50:19 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:50:30 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	str1 = s1;
+	str2 = s2;
+	if (n == 0)
 	{
-		dest[i] = srce[i];
-		i++;
+		return (0);
 	}
-	return (dst);
+	while (n > 0)
+	{
+		if (*str1 != *str2)
+		{
+			return (*str1 - *str2);
+		}
+		str1++;
+		str2++;
+		n--;
+	}
+	return (0);
 }

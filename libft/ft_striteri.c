@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:58:34 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:58:39 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	unsigned int	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
 	i = 0;
-	while (i < n)
+	while (s[i])
 	{
-		dest[i] = srce[i];
+		(*f)(i, &s[i]);
 		i++;
 	}
-	return (dst);
 }

@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 18:03:41 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:03:49 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	char	*substr;
+	size_t	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
+	if (s == NULL)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	substr = (char *)malloc(sizeof(char) * (len + 1));
+	if (substr == NULL)
+		return (NULL);
 	i = 0;
-	while (i < n)
+	while (i < len && s[start + i])
 	{
-		dest[i] = srce[i];
+		substr[i] = s[start + i];
 		i++;
 	}
-	return (dst);
+	substr[i] = '\0';
+	return (substr);
 }

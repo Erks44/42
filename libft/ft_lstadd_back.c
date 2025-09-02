@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:02:18 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:48:02 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	t_list	*last;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	if (!alst || !new)
+		return ;
+	last = ft_lstlast(*alst);
+	if (!last)
 	{
-		dest[i] = srce[i];
-		i++;
+		*alst = new;
 	}
-	return (dst);
+	else
+	{
+		last->next = new;
+	}
 }

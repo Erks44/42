@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:52:22 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:53:50 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	unsigned int	num;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	i = 0;
-	while (i < n)
+	if (nb < 0)
 	{
-		dest[i] = srce[i];
-		i++;
+		ft_putchar_fd('-', fd);
+		num = (unsigned int)(nb * -1);
 	}
-	return (dst);
+	else
+	{
+		num = (unsigned int)nb;
+	}
+	if (num >= 10)
+	{
+		ft_putnbr_fd(num / 10, fd);
+	}
+	ft_putchar_fd(num % 10 + 48, fd);
 }

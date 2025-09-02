@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 18:31:09 by egjika            #+#    #+#             */
-/*   Updated: 2025/06/27 18:33:35 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:51:50 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:51:57 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	ft_putendl_fd(char *s, int fd)
 {
-	size_t			i;
-	unsigned char	*srce;
-	unsigned char	*dest;
+	int	i;
 
-	srce = (unsigned char *)src;
-	dest = (unsigned char *)dst;
 	i = 0;
-	while (i < n)
+	while (s[i])
 	{
-		dest[i] = srce[i];
+		write(fd, &s[i], 1);
 		i++;
 	}
-	return (dst);
+	write(fd, "\n", 1);
 }
