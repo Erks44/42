@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/06 19:55:20 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/06 19:55:20 by marvin           ###   ########.fr       */
+/*   Created: 2025/09/09 20:55:17 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/09 20:55:17 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 int	ft_format(char c, va_list list)
 {
-	int	count;
+	int	count = 0;
 
-	count = 0;
 	if (c == 'c')
 		count += ft_putchar(va_arg(list, int));
 	else if (c == 's')
 		count += ft_putstr(va_arg(list, char *));
-	else if (c == 'd')
+	else if (c == 'd' || c == 'i')
 		count += ft_putnbr(va_arg(list, int));
-	else if (c =='i')
-		count += ft_putnbr(va_arg(list, int));
-	else if
-		count += ft_putnbr_unsigned(va_arg(list, int));
+	else if (c == 'u')
+		count += ft_putnbr_unsigned(va_arg(list, unsigned int));
+	else if (c == 'p')
+		count += ft_putptr(va_arg(list, void *));
+	else if (c == 'x')
+		count += ft_puthex(va_arg(list, unsigned int));
+	else if (c == 'X')
+		count += ft_puthexa(va_arg(list, unsigned int));
+	else if (c == '%')
+		count += ft_putchar('%');
 	return(count);
 }
 
@@ -52,11 +57,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(list);
 	return (lentotal);
-}
-
-int main()
-{
-	int c = ft_printf("tonzinc %d et le nombre de caracteres est de : ", 32);
-	ft_printf("%d", c);
-	return (0);
 }

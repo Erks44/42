@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:55:31 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:55:31 by egjika           ###   ########.fr       */
+/*   Created: 2025/09/09 21:05:51 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/09 21:05:51 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_putstr(char *str)
+int	ft_puthex(unsigned long a)
 {
-	int len;
+	int	compt;
 
-	len = 0;
-	if (str == NULL)
-		str = "(null)";
-	while (str[len])
-		len++;
-	write(1, str, len);
-	return (len);
+	compt = 0;
+	if (a >= 16)
+	{
+		compt += ft_puthex(a / 16);
+	}
+	write(1, &"0123456789abcdef"[a % 16], 1);
+	compt++;
+	return (compt);
 }
