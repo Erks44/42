@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ putptr.c                                       :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 00:31:50 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/10 00:31:50 by egjika           ###   ########.fr       */
+/*   Created: 2025/09/09 21:05:51 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/09 21:05:51 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putptr(void *ptr)
+int	ft_puthex(unsigned long a)
 {
 	int	compt;
-	unsigned long	adr;
 
 	compt = 0;
-	adr = (unsigned long)ptr;
-	write(1, "0x", 2);
-	compt += 2;
-	compt += ft_puthex(adr);
+	if (a >= 16)
+	{
+		compt += ft_puthex(a / 16);
+	}
+	write(1, &"0123456789abcdef"[a % 16], 1);
+	compt++;
 	return (compt);
 }

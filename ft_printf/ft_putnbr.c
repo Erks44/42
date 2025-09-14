@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putnbr(int a)
 {
@@ -23,18 +23,14 @@ int	ft_putnbr(int a)
 		ft_putchar('-');
 		if (a == -2147483648)
 		{
-			compt++;
-			ft_putchar('2');
+			compt += ft_putchar('2');
 			a = 147483648;
 		}
 		else
 			a = -a;
 	}
 	if (a >= 10)
-	{
-		ft_putnbr(a / 10);
-		compt++;
-	}
-	ft_putchar((a % 10) + '0');
+		compt += ft_putnbr(a / 10);
+	compt += ft_putchar((a % 10) + '0');
 	return (compt);
 }

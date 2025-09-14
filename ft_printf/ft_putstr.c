@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:07 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:07 by egjika           ###   ########.fr       */
+/*   Created: 2025/09/09 20:55:31 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/09 20:55:31 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putnbr_unsigned(unsigned int a)
+int	ft_putstr(char *str)
 {
-	int	len;
+	int len;
 
 	len = 0;
-	if (a >= 10)
-		len += ft_putnbr_unsigned(a / 10);
-	len += ft_putchar('0' + (a % 10));
+	if (str == NULL)
+		str = "(null)";
+	while (str[len])
+		len++;
+	write(1, str, len);
 	return (len);
 }

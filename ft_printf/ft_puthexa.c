@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_puthexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:17 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:17 by egjika           ###   ########.fr       */
+/*   Created: 2025/09/10 00:01:39 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/10 00:01:39 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_puthexa(unsigned long a)
 {
-	write(1, &c, 1);
-	return (1);
+	int	compt;
+
+	compt = 0;
+	if (a >= 16)
+	{
+		compt += ft_puthexa(a / 16);
+	}
+	write(1, &"0123456789ABCDEF"[a % 16], 1);
+	compt++;
+	return (compt);
 }

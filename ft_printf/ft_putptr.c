@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_ putptr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:55:31 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:55:31 by egjika           ###   ########.fr       */
+/*   Created: 2025/09/10 00:31:50 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/10 00:31:50 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putptr(void *ptr)
 {
-	int len;
+	int		count;
+	unsigned long	addr;
 
-	len = 0;
-	if (str == NULL)
-		str = "(null)";
-	while (str[len])
-		len++;
-	write(1, str, len);
-	return (len);
+	if (!ptr)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
+	count = 0;
+	write(1, "0x", 2);
+	count += 2;
+	addr = (unsigned long)ptr;
+	count += ft_puthex(addr);
+	return (count);
 }
+ 
