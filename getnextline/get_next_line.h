@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ putptr.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/10 00:31:50 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/10 00:31:50 by egjika           ###   ########.fr       */
+/*   Created: 2025/09/17 17:10:29 by egjika            #+#    #+#             */
+/*   Updated: 2025/09/17 17:10:29 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef get_next_line
+# define get_next_line
 
-int	ft_putptr(void *ptr)
-{
-	int		count;
-	unsigned long	addr;
+int	ft_strlen(char *str);
+char	*ft_strchr(const char *src, int c);
+char	*ft_strcpy(char *s1, char *s2);
+char	*ft_strdup(char *str);
 
-	if (!ptr)
-	{
-		write(1, "(nil)", 5);
-		return (5);
-	}
-	count = 0;
-	write(1, "0x", 2);
-	count += 2;
-	addr = (unsigned long)ptr;
-	count += ft_puthex(addr);
-	return (count);
-}
+# endif
