@@ -9,15 +9,16 @@
 /*   Updated: 2025/09/17 17:09:54 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "get_next_line.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	count;
 
 	count = 0;
 	if (!str)
 		return (0);
-	while(str[count])
+	while (str[count])
 		count++;
 	return (count);
 }
@@ -40,28 +41,22 @@ char	*ft_strchr(const char *src, int c)
 	return (0);
 }
 
-char	*ft_strcpy(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s2[i])
-	{
-		s1[i] = s2[i];
-		i++;
-	}
-	s1[i] = '\0';
-	return (s1);
-}
-
 char	*ft_strdup(const char *src)
 {
 	char	*dup;
+	int		i;
 
+	i = 0;
 	dup = malloc(ft_strlen(src) + 1);
 	if (dup != NULL)
 	{
-		return (ft_strcpy(dup, src));
+		while (src[i])
+		{
+			dup[i] = src[i];
+			i++;
+		}
+		dup[i] = '\0';
+		return (dup);
 	}
 	return (dup);
 }
@@ -72,6 +67,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	int		j;
 	char	*str;
 
+	if (!s1)
+		return (ft_strdup(s2));
 	i = 0;
 	j = 0;
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
