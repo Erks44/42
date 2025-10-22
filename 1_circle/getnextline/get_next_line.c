@@ -6,7 +6,7 @@
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 02:44:20 by egjika            #+#    #+#             */
-/*   Updated: 2025/10/15 17:21:28 by egjika           ###   ########.fr       */
+/*   Updated: 2025/10/22 18:32:29 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ static char	*read_to_stash(int fd, char *stash)
 	{
 		nread = read(fd, buf, BUFFER_SIZE);
 		if (nread < 0)
-			return (free(buf), NULL);
+			return (free(buf), free(stash), NULL);
 		buf[nread] = '\0';
 		tmp = ft_strjoin(stash, buf);
+		if (!tmp)
+			return (free(buf), free(stash), NULL);
 		free(stash);
 		stash = tmp;
 	}
@@ -98,15 +100,21 @@ static char	*stash_remainder(char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
 	char		*line;
+	static char	*g_stash;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash = read_to_stash(fd, stash);
-	if (!stash)
+	g_stash = read_to_stash(fd, g_stash);
+	if (!g_stash)
 		return (NULL);
-	line = extract_line(stash);
-	stash = stash_remainder(stash);
+	line = extract_line(g_stash);
+	if (!line)
+	{
+		free(g_stash);
+		g_stash = NULL;
+		return (NULL);
+	}
+	g_stash = stash_remainder(g_stash);
 	return (line);
 }

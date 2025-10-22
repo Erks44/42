@@ -73,7 +73,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	j = 0;
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == NULL)
-		return (NULL);
+		return (free(str), NULL);
 	while (s1[i] != '\0')
 	{
 		str[i] = s1[i];
