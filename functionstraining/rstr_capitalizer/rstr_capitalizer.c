@@ -11,7 +11,7 @@ int main(int ac, char **av)
 			while(av[a][i])
 			{
 				char c;
-				if((av[a][i + 1] == ' ' || av[a][i + 1] == '\t' || av[a][i + 1] == '\0') && !(av[a][i - 1] == ' ' || av[a][i - 1] == '\t') && (av[a][i] >= 'a' && av[a][i] <= 'z'))
+				if((av[a][i + 1] == ' ' || av[a][i + 1] == '\t' || av[a][i + 1] == '\0') && !(av[a][i - 1] == ' ' && av[a][i - 1] == '\t') && (av[a][i] >= 'a' && av[a][i] <= 'z'))
 					c = av[a][i] - 32;
 				else if ((av[a][i + 1] == ' ' || av[a][i + 1] == '\t') && (av[a][i - 1] == ' ' || av[a][i - 1] == '\t' || i == 0) && (av[a][i] >= 'a' && av[a][i] <= 'z'))
 					c = av[a][i] - 32;
