@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ylanamonrose <ylanamonrose@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 15:25:19 by egjika            #+#    #+#             */
-/*   Updated: 2026/01/05 19:21:39 by egjika           ###   ########.fr       */
+/*   Updated: 2026/01/11 16:31:30 by ylanamonros      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,20 @@ void	ps_parse(t_stack *a, int argc, char **argv)
 		ps_error();
 	ps_fill_from_argv(a, argv);
 	ps_check_duplicates(a);
+}
+
+int	ps_is_sorted(t_stack *a)
+{
+	int i;
+
+	i = 0;
+	if (a->size < 2)
+		return (1);
+	while(i < a->size - 1)
+	{
+		if(a->v[i] > a->v[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
