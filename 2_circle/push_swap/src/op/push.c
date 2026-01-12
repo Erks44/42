@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylanamonrose <ylanamonrose@student.42.f    +#+  +:+       +#+        */
+/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:24:52 by ylanamonros       #+#    #+#             */
-/*   Updated: 2026/01/11 11:36:36 by ylanamonros      ###   ########.fr       */
+/*   Updated: 2026/01/12 17:13:25 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ps_pb(t_stack *a, t_stack *b)
 {

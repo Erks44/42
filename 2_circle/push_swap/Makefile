@@ -3,21 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylanamonrose <ylanamonrose@student.42.f    +#+  +:+       +#+         #
+#    By: egjika <egjika@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/05 13:52:24 by egjika            #+#    #+#              #
-#    Updated: 2026/01/11 16:49:56 by ylanamonros      ###   ########.fr        #
+#    Updated: 2026/01/12 17:32:14 by egjika           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilibft -Iinclude
+CFLAGS = -Wall -Wextra -Werror -Ilibft -I.
 
 SRCDIR = src
 SRC = main.c error.c parse.c sort_small.c sort_large.c \
-      op/op_rotate.c op/op_swap.c op/push.c
+      op/op_rotate.c op/op_swap.c op/push.c op/op_reverse.c utils.c parse_utils.c
 OBJ = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
 LIBFT_DIR = libft
@@ -32,7 +32,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I. -c $< -o $@
 
 clean:
 	rm -f $(OBJ)

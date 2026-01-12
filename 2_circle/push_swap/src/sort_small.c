@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylanamonrose <ylanamonrose@student.42.f    +#+  +:+       +#+        */
+/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 13:22:01 by ylanamonros       #+#    #+#             */
-/*   Updated: 2026/01/11 16:37:31 by ylanamonros      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:56:15 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sort_two(t_stack *a)
+void	sort_two(t_stack *a)
 {
-	if(a->v[0] > a->v[1])
+	if (a->v[0] > a->v[1])
 		ps_sa(a);
 }
 
-void sort_three(t_stack *a)
+void	sort_three(t_stack *a)
 {
 	if (a->size != 3)
 		return ;
-    	if (a->v[0] > a->v[1] && a->v[1] < a->v[2] && a->v[0] < a->v[2])
-        	ps_sa(a);
-    	else if (a->v[0] > a->v[1] && a->v[1] > a->v[2])
+	if (a->v[0] > a->v[1] && a->v[1] < a->v[2] && a->v[0] < a->v[2])
+		ps_sa(a);
+	else if (a->v[0] > a->v[1] && a->v[1] > a->v[2])
 	{
 		ps_sa(a);
 		ps_rra(a);
 	}
-    	else if (a->v[0] > a->v[1] && a->v[1] < a->v[2] && a->v[0] > a->v[2])
-        	ps_ra(a);
-    	else if (a->v[0] < a->v[1] && a->v[1] > a->v[2] && a->v[0] < a->v[2])
+	else if (a->v[0] > a->v[1] && a->v[1] < a->v[2] && a->v[0] > a->v[2])
+		ps_ra(a);
+	else if (a->v[0] < a->v[1] && a->v[1] > a->v[2] && a->v[0] < a->v[2])
 	{
 		ps_sa(a);
 		ps_ra(a);
@@ -75,7 +75,7 @@ static void	ps_push_min_to_b(t_stack *a, t_stack *b)
 	ps_pb(a, b);
 }
 
-void sort_small(t_stack *a, t_stack *b)
+void	sort_small(t_stack *a, t_stack *b)
 {
 	if (a->size == 2)
 		sort_two(a);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylanamonrose <ylanamonrose@student.42.f    +#+  +:+       +#+        */
+/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:46:45 by egjika            #+#    #+#             */
-/*   Updated: 2026/01/11 16:31:33 by ylanamonros      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:52:11 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ps_error(void)
+void	ps_error(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);
