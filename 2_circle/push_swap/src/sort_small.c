@@ -6,7 +6,7 @@
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 13:22:01 by ylanamonros       #+#    #+#             */
-/*   Updated: 2026/01/12 15:56:15 by egjika           ###   ########.fr       */
+/*   Updated: 2026/01/13 18:58:46 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,21 @@ static int	ps_find_min_index(t_stack *a)
 static void	ps_push_min_to_b(t_stack *a, t_stack *b)
 {
 	int	index;
+	int	r;
 
 	index = ps_find_min_index(a);
-	if (index == 1)
-		ps_ra(a);
-	else if (index == 2 && a->size == 4)
-		ps_rra(a);
-	else if (index == 2 && a->size == 5)
+	if (index <= a->size / 2)
 	{
-		ps_ra(a);
-		ps_ra(a);
+		r = index;
+		while (r-- > 0)
+			ps_ra(a);
 	}
-	else if (index == 3)
-		ps_rra(a);
+	else
+	{
+		r = a->size - index;
+		while (r-- > 0)
+			ps_rra(a);
+	}
 	ps_pb(a, b);
 }
 
