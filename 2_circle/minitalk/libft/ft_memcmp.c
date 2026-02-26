@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:50:19 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:50:30 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	compt;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
-	compt = 0;
-	if (a < 0)
+	str1 = s1;
+	str2 = s2;
+	if (n == 0)
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		return (0);
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	while (n > 0)
+	{
+		if (*str1 != *str2)
+		{
+			return (*str1 - *str2);
+		}
+		str1++;
+		str2++;
+		n--;
+	}
+	return (0);
 }

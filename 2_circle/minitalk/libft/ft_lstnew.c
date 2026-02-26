@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:45:46 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:33:33 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+t_list	*ft_lstnew(void *content)
 {
-	int	compt;
+	t_list	*elem;
 
-	compt = 0;
-	if (a < 0)
+	elem = malloc(sizeof(t_list));
+	if (!elem)
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		return (NULL);
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	elem->content = content;
+	elem->next = NULL;
+	return (elem);
 }

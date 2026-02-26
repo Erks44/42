@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:52:22 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:53:50 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	int	compt;
+	unsigned int	num;
 
-	compt = 0;
-	if (a < 0)
+	if (nb < 0)
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		ft_putchar_fd('-', fd);
+		num = (unsigned int)(nb * -1);
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	else
+	{
+		num = (unsigned int)nb;
+	}
+	if (num >= 10)
+	{
+		ft_putnbr_fd(num / 10, fd);
+	}
+	ft_putchar_fd(num % 10 + 48, fd);
 }

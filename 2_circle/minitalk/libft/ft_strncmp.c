@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 18:00:23 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:00:31 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	compt;
+	size_t	i;
 
-	compt = 0;
-	if (a < 0)
+	i = 0;
+	while (i < n && (s1[i] || s2[i]))
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
 		{
-			compt += ft_putchar('2');
-			a = 147483648;
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		}
-		else
-			a = -a;
+		i++;
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	return (0);
 }

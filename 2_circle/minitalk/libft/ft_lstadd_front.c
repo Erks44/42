@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:03:04 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:04:09 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	compt;
-
-	compt = 0;
-	if (a < 0)
+	if (new && lst)
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		new->next = *lst;
+		*lst = new;
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
 }

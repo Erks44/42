@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:57:13 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:57:19 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+char	*ft_strchr(const char *src, int c)
 {
-	int	compt;
+	int	i;
 
-	compt = 0;
-	if (a < 0)
+	i = 0;
+	while (src[i])
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
+		if ((unsigned char)src[i] == (unsigned char)c)
 		{
-			compt += ft_putchar('2');
-			a = 147483648;
+			return ((char *)&src[i]);
 		}
-		else
-			a = -a;
+		i++;
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	if (c == '\0')
+		return ((char *)&src[i]);
+	return (0);
 }

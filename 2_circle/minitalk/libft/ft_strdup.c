@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:57:44 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:58:14 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+char	*ft_strcpy(char *s1, char *s2)
 {
-	int	compt;
+	int	i;
 
-	compt = 0;
-	if (a < 0)
+	i = 0;
+	while (s2[i])
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		s1[i] = s2[i];
+		i++;
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	s1[i] = '\0';
+	return (s1);
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*dup;
+
+	dup = malloc(ft_strlen(src) + 1);
+	if (dup != NULL)
+	{
+		return (ft_strcpy(dup, src));
+	}
+	return (dup);
 }

@@ -1,44 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/26 21:29:55 by errikosgjik       #+#    #+#             */
-/*   Updated: 2026/01/28 17:20:09 by egjika           ###   ########.fr       */
+/*   Created: 2026/01/28 16:38:27 by egjika            #+#    #+#             */
+/*   Updated: 2026/01/28 16:46:58 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handler(int sig)
+static void	send_char(int pid, unsigned char c)
 {
-	static int				compt;
-	static unsigned char	ch;
+	int	i;
 
-	if (sig == SIGUSR1)
-		ch = ch << 1;
-	else if (sig == SIGUSR2)
-		ch = (ch << 1) | 1;
-	compt++;
-	if (compt == 8)
+	i = 7;
+	while (i >= 0)
 	{
-		if (ch == '\0')
-			write(1, "\n", 1);
+		if ((c >> i) & 1)
+			kill(pid, SIGUSR2);
 		else
-			write(1, &ch, 1);
-		ch = 0;
-		compt = 0;
+			kill(pid, SIGUSR1);
+		usleep(150);
+		i--;
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	ft_printf("Server PID: %d\n", getpid());
-	signal(SIGUSR1, handler);
-	signal(SIGUSR2, handler);
-	while (1)
-		pause();
+	int		pid;
+	char	*msg;
+
+	if (ac != 3)
+	{
+		ft_printf("Usage: %s <PID> <message>\n", av[0]);
+		return (1);
+	}
+	pid = ft_atoi(av[1]);
+	msg = av[2];
+	while (*msg)
+	{
+		send_char(pid, (unsigned char)*msg);
+		msg++;
+	}
+	send_char(pid, '\0');
 	return (0);
 }

@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 18:01:01 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:01:12 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+char	*ft_strnstr(const char *str, const char *to_find, size_t n)
 {
-	int	compt;
+	size_t	i;
+	size_t	j;
 
-	compt = 0;
-	if (a < 0)
+	if (*to_find == '\0')
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		return ((char *)str);
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	i = 0;
+	while (str[i] && i < n)
+	{
+		j = 0;
+		while (i + j < n && str[i + j] == to_find[j])
+		{
+			j++;
+			if (to_find[j] == '\0')
+			{
+				return ((char *)&str[i]);
+			}
+		}
+		i++;
+	}
+	return (0);
 }

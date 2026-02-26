@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 18:00:05 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 18:00:10 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 {
-	int	compt;
+	char			*res;
+	unsigned int	i;
 
-	compt = 0;
-	if (a < 0)
+	res = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!res)
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
-		{
-			compt += ft_putchar('2');
-			a = 147483648;
-		}
-		else
-			a = -a;
+		return (NULL);
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	i = 0;
+	while (i < ft_strlen(s))
+	{
+		res[i] = (*f)(i, s[i]);
+		i++;
+	}
+	res[i] = 0;
+	return (res);
 }

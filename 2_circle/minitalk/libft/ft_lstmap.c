@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/09 20:54:32 by egjika            #+#    #+#             */
-/*   Updated: 2025/09/09 20:54:32 by egjika           ###   ########.fr       */
+/*   Created: 2025/06/27 17:21:31 by egjika            #+#    #+#             */
+/*   Updated: 2025/06/27 17:21:35 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putnbr(int a)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	compt;
+	t_list	*new_list;
+	t_list	*new_obj;
 
-	compt = 0;
-	if (a < 0)
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		compt++;
-		ft_putchar('-');
-		if (a == -2147483648)
+		new_obj = ft_lstnew(f(lst->content));
+		if (!new_obj)
 		{
-			compt += ft_putchar('2');
-			a = 147483648;
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		else
-			a = -a;
+		ft_lstadd_back(&new_list, new_obj);
+		lst = lst->next;
 	}
-	if (a >= 10)
-		compt += ft_putnbr(a / 10);
-	compt += ft_putchar((a % 10) + '0');
-	return (compt);
+	return (new_list);
 }
