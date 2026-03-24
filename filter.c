@@ -1,3 +1,5 @@
+
+#include "stdio.h"
 #include "unistd.h"
 #include "stdlib.h"
 
@@ -10,7 +12,7 @@ int ft_strlen(char *str)
 	return(i);
 }
 
-void	ft_filter(char *phrase, char *filtre)
+void	ft_filter(char *phrase, const char *filtre)
 {
 	int i = 0;
 	int j, k;
@@ -40,14 +42,15 @@ void	ft_filter(char *phrase, char *filtre)
 	}
 }
 
-#include <stdio.h>
 
 int main(int ac, char **av)
 {
+	if (ac != 2 || av[1][0] == '\0')
+		return 1;
 	char *result = NULL;
 	char *buffer;
-	char tmp[42];
-	size_t c;
+	char tmp[BU];
+	ssize_t c;
 	int i = 0;
 	int total_read = 0;
 
@@ -57,6 +60,7 @@ int main(int ac, char **av)
 		buffer = realloc(result, total_read + c + 1);
 		if (!buffer)
 		{
+			perror("realloc");
 			free(result);
 			return (1);
 		}
@@ -67,10 +71,14 @@ int main(int ac, char **av)
 			i++;
 		}
 		total_read += c;
-		result[total_read] = '\0';
+		result[total_read] = '\0';++
 	}
 	if (c < 0)
+	{
+		perror("read");
+		free(result);
 		return 1;
+	}
 	if (!result)
 		return(0);
 	ft_filter(result, av[1]);
