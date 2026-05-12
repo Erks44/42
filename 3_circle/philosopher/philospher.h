@@ -6,9 +6,14 @@
 /*   By: errikosgjika <errikosgjika@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:28:00 by errikosgjik       #+#    #+#             */
-/*   Updated: 2026/05/08 13:56:16 by errikosgjik      ###   ########.fr       */
+/*   Updated: 2026/05/11 14:27:54 by errikosgjik      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PHILOSOPHER_H
+# define PHILOSOPHER_H
+
+int	ft_atoi(char *str);
 
 typedef struct s_philo
 {
@@ -22,12 +27,17 @@ typedef struct s_philo
 
 typedef struct s_simulation
 {
+	int	nb_philosophers;
 	int	time_to_eat;
 	int	time_to_die;
 	int	time_to_sleep;
-	int	numbers_of_philosophers;
+	int	nb_times_eat;
 	pthread_mutex_t	*forks;
 	t_philo	*philosphers;
+	long	start_time;
 	int	flag;
 	pthread_mutex_t sec_flag;
+	pthread_mutex_t sec_aff;
 }	t_simulation;
+
+#endif
