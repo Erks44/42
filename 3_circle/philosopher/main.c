@@ -1,4 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/13 15:58:25 by egjika            #+#    #+#             */
+/*   Updated: 2026/05/13 22:37:09 by egjika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
+
+int	is_number(char *str)
+{
+	int i = 0;
+
+	while(str[i])
+	{
+		if(!(str[i] >= '0' && str[i] <= '9'))
+			return(1);
+		i++;
+	}
+	return(0);
+}
 
 int	ft_atoi(char *str)
 {
@@ -19,19 +44,6 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return(result * s);
-}
-
-int	is_number(char *str)
-{
-	int i = 0;
-
-	while(str[i])
-	{
-		if(!(str[i] >= '0' && str[i] <= '9'))
-			return(1);
-		i++;
-	}
-	return(0);
 }
 
 int	check_args(int ac, char **av)
@@ -59,5 +71,7 @@ int main(int ac, char **av)
 		return(1);
 	if(init_philosophers(&sim))
 		return(1);
+	start_simulation(&sim);
+	cleanup(&sim);
 	return(0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philospher.h                                       :+:      :+:    :+:   */
+/*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: errikosgjika <errikosgjika@student.42.f    +#+  +:+       +#+        */
+/*   By: egjika <egjika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 18:28:00 by errikosgjik       #+#    #+#             */
-/*   Updated: 2026/05/11 14:27:54 by errikosgjik      ###   ########.fr       */
+/*   Updated: 2026/05/13 22:46:50 by egjika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_simulation
 	int	time_to_sleep;
 	int	nb_times_eat;
 	pthread_mutex_t	*forks;
-	t_philo	*philosphers;
+	t_philo	*philosophers;
 	long	start_time;
 	int	flag;
 	pthread_mutex_t sec_flag;
@@ -49,11 +49,15 @@ typedef struct s_simulation
 
 // utils.c
 long    get_time(void);
+int	is_dead(t_philo *philo);
+void	release_forks(t_philo *philo);
+int	take_forks(t_philo *philo);
 
 // init.c
 void    init_simulation(t_simulation *sim, int ac, char **av);
 int     init_forks(t_simulation *sim);
 int     init_philosophers(t_simulation *sim);
+void	cleanup(t_simulation *sim);
 
 // actions.c
 void    eat(t_philo *philo);
@@ -61,12 +65,13 @@ void    think(t_philo *philo);
 void    ft_sleep(t_philo *philo);
 
 // simulation.c
-void    start_simulation(t_simulation *sim);
 void    *philosopher_routine(void *arg);
+void	*monitor_routine(void *arg);
+void    start_simulation(t_simulation *sim);
 
 // main.c
-int		ft_atoi(char *str);
 int     is_number(char *str);
+int	ft_atoi(char *str);
 int     check_args(int ac, char **av);
 
 #endif
