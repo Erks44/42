@@ -13,7 +13,13 @@
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
-int	ft_atoi(char *str);
+#include <sys/time.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+typedef struct s_simulation t_simulation;
 
 typedef struct s_philo
 {
@@ -38,6 +44,29 @@ typedef struct s_simulation
 	int	flag;
 	pthread_mutex_t sec_flag;
 	pthread_mutex_t sec_aff;
+	pthread_t *threads;
 }	t_simulation;
+
+// utils.c
+long    get_time(void);
+
+// init.c
+void    init_simulation(t_simulation *sim, int ac, char **av);
+int     init_forks(t_simulation *sim);
+int     init_philosophers(t_simulation *sim);
+
+// actions.c
+void    eat(t_philo *philo);
+void    think(t_philo *philo);
+void    ft_sleep(t_philo *philo);
+
+// simulation.c
+void    start_simulation(t_simulation *sim);
+void    *philosopher_routine(void *arg);
+
+// main.c
+int		ft_atoi(char *str);
+int     is_number(char *str);
+int     check_args(int ac, char **av);
 
 #endif

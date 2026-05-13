@@ -1,3 +1,18 @@
+#include "philosopher.h"
+
+int	is_number(char *str)
+{
+	int i = 0;
+
+	while(str[i])
+	{
+		if(!(str[i] >= '0' && str[i] <= '9'))
+			return(1);
+		i++;
+	}
+	return(0);
+}
+
 int	ft_atoi(char *str)
 {
 	int i = 0;
@@ -19,11 +34,9 @@ int	ft_atoi(char *str)
 	return(result * s);
 }
 
-#include <stdio.h>
-
-int main()
+long get_time(void)
 {
-	char *str = "-42";
-	printf("%d\n", ft_atoi(str));
-	return 0;
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return(tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
