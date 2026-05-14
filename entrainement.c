@@ -1,40 +1,42 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-void    print_set(int   *set, int size)
+void	print_set(int *set, int size)
 {
-	int	i = 0;
-	if (i >= size)
+	int i = 0;
+	if(i >= size)
 	{
 		printf("\n");
 		return ;
 	}
+	printf("%d", set[i]);
+	i++;
 	while(i < size)
 	{
-		printf("%d ", set[i]);
+		printf(" %d", set[i]);
 		i++;
 	}
 	printf("\n");
+	return ;
 }
 
-int	calculate(int	*set, int size)
+int calculate(int *set, int size)
 {
-	int	i = 0;
-	int	res = 0;
-
+	int i = 0;
+	int result = 0;
 	while(i < size)
 	{
-		res += set[i];
+		result += set[i];
 		i++;
 	}
-	return(res);
+	return(result);
 }
 
 void	power_set(int n, int *set, int set_index, int *ret, int ret_index, int max_size)
 {
-	if (set_index == max_size)
+	if(set_index == max_size)
 	{
-		if (calculate(ret, ret_index) == n)
+		if((calculate(ret, ret_index)) == n)
 			print_set(ret, ret_index);
 		return ;
 	}
@@ -45,12 +47,12 @@ void	power_set(int n, int *set, int set_index, int *ret, int ret_index, int max_
 
 int main(int ac, char **av)
 {
-	int	i;
-	int	n;
-	int	*set;
-	int	*ret;
-
-	if (ac < 2)
+	int n;
+	int *set;
+	int *ret;
+	int i;
+	
+	if(ac < 3)
 		return(2);
 	av[ac] = NULL;
 	if(!(set = malloc(sizeof(int) * ac - 2)))

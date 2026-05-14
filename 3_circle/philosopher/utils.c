@@ -12,42 +12,56 @@
 
 #include "philosopher.h"
 
-long get_time(void)
+long	get_time(void)
 {
-	struct timeval tv;
-    	gettimeofday(&tv, NULL);
-    	return(tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-int    is_dead(t_philo *philo)
+int	is_dead(t_philo *philo)
 {
-	int dead;
+	int	dead;
 
 	pthread_mutex_lock(&philo->sim->sec_flag);
 	dead = philo->sim->flag;
 	pthread_mutex_unlock(&philo->sim->sec_flag);
-	return(dead);
+	return (dead);
 }
 
-void    release_forks(t_philo *philo)
+void	release_forks(t_philo *philo)
 {
-   	pthread_mutex_unlock(philo->left_fork);
-   	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 
-int    take_forks(t_philo *philo)
+int	take_forks(t_philo *philo)
 {
-    	pthread_mutex_lock(philo->left_fork);
-    	if(is_dead(philo))
-    	{
-        	pthread_mutex_unlock(philo->left_fork);
-        	return(1);
-    	}
-    	pthread_mutex_lock(philo->right_fork);
-    	if(is_dead(philo))
-    	{
-        	release_forks(philo);
-        	return(1);
-    	}
-    	return(0);
+	pthread_mutex_lock(philo->left_fork);
+	if (is_dead(philo))
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		return (1);
+	}
+	pthread_mutex_lock(philo->right_fork);
+	if (is_dead(philo))
+	{
+		release_forks(philo);
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_usleep(long ms, t_philo *philo)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < ms)
+	{
+		if (is_dead(philo))
+			return ;
+		usleep(100);
+	}
 }

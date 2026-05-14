@@ -15,44 +15,49 @@
 void	eat(t_philo *philo)
 {
 	if (take_forks(philo))
-		return;
+		return ;
 	pthread_mutex_lock(&philo->sim->sec_aff);
-	printf("%ld %d has taken a fork\n", get_time() - philo->sim->start_time, philo->id_philo);
+	printf("%ld %d has taken a fork\n", get_time() - philo->sim->start_time,
+		philo->id_philo);
 	pthread_mutex_unlock(&philo->sim->sec_aff);
 	if (is_dead(philo))
 	{
 		release_forks(philo);
-		return;
+		return ;
 	}
 	pthread_mutex_lock(&philo->sim->sec_aff);
-	printf("%ld %d has taken a fork\n", get_time() - philo->sim->start_time, philo->id_philo);
+	printf("%ld %d has taken a fork\n", get_time() - philo->sim->start_time,
+		philo->id_philo);
 	pthread_mutex_unlock(&philo->sim->sec_aff);
 	pthread_mutex_lock(&philo->sim->sec_flag);
-    	philo->last_meal_time = get_time();
+	philo->last_meal_time = get_time();
 	pthread_mutex_unlock(&philo->sim->sec_flag);
 	pthread_mutex_lock(&philo->sim->sec_aff);
-    	printf("%ld %d is eating\n", get_time() - philo->sim->start_time, philo->id_philo);
+	printf("%ld %d is eating\n", get_time() - philo->sim->start_time,
+		philo->id_philo);
 	pthread_mutex_unlock(&philo->sim->sec_aff);
-    	usleep(philo->sim->time_to_eat * 1000);
-    	philo->times_eaten++;
+	ft_usleep(philo->sim->time_to_eat, philo);
+	philo->times_eaten++;
 	release_forks(philo);
 }
 
-void    think(t_philo *philo)
+void	think(t_philo *philo)
 {
 	if (is_dead(philo))
-		return;
+		return ;
 	pthread_mutex_lock(&philo->sim->sec_aff);
-    	printf("%ld %d is thinking\n", get_time() - philo->sim->start_time, philo->id_philo);
+	printf("%ld %d is thinking\n", get_time() - philo->sim->start_time,
+		philo->id_philo);
 	pthread_mutex_unlock(&philo->sim->sec_aff);
 }
 
 void	ft_sleep(t_philo *philo)
 {
 	if (is_dead(philo))
-		return;
+		return ;
 	pthread_mutex_lock(&philo->sim->sec_aff);
-    	printf("%ld %d is sleeping\n", get_time() - philo->sim->start_time, philo->id_philo);
+	printf("%ld %d is sleeping\n", get_time() - philo->sim->start_time,
+		philo->id_philo);
 	pthread_mutex_unlock(&philo->sim->sec_aff);
-	usleep(philo->sim->time_to_sleep * 1000);
+	ft_usleep(philo->sim->time_to_sleep, philo);
 }
