@@ -132,6 +132,8 @@ char			*get_env_name(char *dest, const char *src);
 int				is_in_env(t_env *env, char *args);
 int				ft_unset(char **args, t_mini *mini);
 void			mini_exit(t_mini *mini, char **cmd);
+int				update_oldpwd(t_env *env);
+int				update_pwd(t_env *env);
 
 /*
 ** PARSING
@@ -176,6 +178,8 @@ int				next_alloc(char *line, int *i);
 void			free_token(t_token *start);
 void			free_env(t_env *env);
 void			free_tab(char **tab);
+char			*space_alloc(char *line);
+void			type_tokens(t_mini *mini);
 
 /*
 ** TOKEN TOOLS

@@ -32,6 +32,22 @@ int	is_in_env(t_env *env, char *args)
 	return (SUCCESS);
 }
 
+static void	remove_node(t_env *prev, t_env *env, t_env **env_ptr)
+{
+	if (!prev && !env->next)
+	{
+		ft_memdel(env->value);
+		env->value = NULL;
+		return ;
+	}
+	if (prev)
+		prev->next = env->next;
+	else
+		*env_ptr = env->next;
+	ft_memdel(env->value);
+	ft_memdel(env);
+}
+
 static void	unset_var(const char *name, t_env **env_ptr)
 {
 	t_env	*env;
@@ -46,18 +62,7 @@ static void	unset_var(const char *name, t_env **env_ptr)
 		if (ft_strncmp(name, env->value, len) == 0
 			&& (env->value[len] == '=' || env->value[len] == '\0'))
 		{
-			if (!prev && !env->next)
-			{
-				ft_memdel(env->value);
-				env->value = NULL;
-				return ;
-			}
-			if (prev)
-				prev->next = env->next;
-			else
-				*env_ptr = env->next;
-			ft_memdel(env->value);
-			ft_memdel(env);
+			remove_node(prev, env, env_ptr);
 			return ;
 		}
 		prev = env;

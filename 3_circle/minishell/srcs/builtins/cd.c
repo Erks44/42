@@ -41,41 +41,8 @@ static char	*get_env_path(t_env *env, const char *var, size_t len)
 	return (NULL);
 }
 
-static int	update_oldpwd(t_env *env)
+static char	*get_path_by_option(int option, t_env *env)
 {
-	char	cwd[PATH_MAX];
-	char	*oldpwd;
-
-	if (getcwd(cwd, PATH_MAX) == NULL)
-		return (ERROR);
-	oldpwd = ft_strjoin("OLDPWD=", cwd);
-	if (!oldpwd)
-		return (ERROR);
-	if (is_in_env(env, oldpwd) == 0)
-		env_add(oldpwd, env);
-	ft_memdel(oldpwd);
-	return (SUCCESS);
-}
-
-static int	update_pwd(t_env *env)
-{
-	char	cwd[PATH_MAX];
-	char	*pwd;
-
-	if (getcwd(cwd, PATH_MAX) == NULL)
-		return (ERROR);
-	pwd = ft_strjoin("PWD=", cwd);
-	if (!pwd)
-		return (ERROR);
-	if (is_in_env(env, pwd) == 0)
-		env_add(pwd, env);
-	ft_memdel(pwd);
-	return (SUCCESS);
-}
-
-static int	go_to_path(int option, t_env *env)
-{
-	int		ret;
 	char	*env_path;
 
 	env_path = NULL;
@@ -85,18 +52,26 @@ static int	go_to_path(int option, t_env *env)
 		env_path = get_env_path(env, "HOME", 4);
 		if (!env_path)
 			ft_putendl_fd("minishell : cd: HOME not set", STDERR);
-		if (!env_path)
-			return (ERROR);
 	}
 	else if (option == 1)
 	{
 		env_path = get_env_path(env, "OLDPWD", 6);
 		if (!env_path)
 			ft_putendl_fd("minishell : cd: OLDPWD not set", STDERR);
-		if (!env_path)
-			return (ERROR);
-		update_oldpwd(env);
+		else
+			update_oldpwd(env);
 	}
+	return (env_path);
+}
+
+static int	go_to_path(int option, t_env *env)
+{
+	int		ret;
+	char	*env_path;
+
+	env_path = get_path_by_option(option, env);
+	if (!env_path)
+		return (ERROR);
 	ret = chdir(env_path);
 	if (ret == 0)
 		update_pwd(env);

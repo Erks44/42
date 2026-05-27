@@ -56,3 +56,37 @@ void	free_tab(char **tab)
 	if (tab)
 		ft_memdel(tab);
 }
+
+char	*space_alloc(char *line)
+{
+	char	*new;
+	int		count;
+	int		i;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (is_sep(line, i))
+			count++;
+		i++;
+	}
+	new = malloc(sizeof(char) * (i + 2 * count + 1));
+	if (!new)
+		return (NULL);
+	return (new);
+}
+
+void	type_tokens(t_mini *mini)
+{
+	t_token	*token;
+
+	squish_args(mini);
+	token = mini->start;
+	while (token)
+	{
+		if (is_type(token, ARG))
+			type_arg(token, 0);
+		token = token->next;
+	}
+}
