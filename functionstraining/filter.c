@@ -1,21 +1,23 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 42
+#endif
 
-#include "stdio.h"
-#include "unistd.h"
-#include "stdlib.h"
-
-int ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int i = 0;
-
 	while(str[i])
 		i++;
 	return(i);
 }
 
-void	ft_filter(char *phrase, const char *filtre)
+void	filter(char *phrase, const char *filtre)
 {
 	int i = 0;
-	int j, k;
+	int j = 0;
+	int k;
 	int flen = ft_strlen(filtre);
 
 	while(phrase[i])
@@ -26,14 +28,13 @@ void	ft_filter(char *phrase, const char *filtre)
 		if(j == flen)
 		{
 			k = 0;
-			while(k < flen)
+			while(k < j)
 			{
 				write(1, "*", 1);
-				i++;
 				k++;
+				i++;
 			}
 		}
-		
 		else
 		{
 			write(1, &phrase[i], 1);
@@ -42,45 +43,45 @@ void	ft_filter(char *phrase, const char *filtre)
 	}
 }
 
-
 int main(int ac, char **av)
 {
-	if (ac != 2 || av[1][0] == '\0')
-		return 1;
-	char *result = NULL;
-	char *buffer;
-	char tmp[BU];
 	ssize_t c;
 	int i = 0;
+	char buffer[BUFFER_SIZE];
+	char *result = NULL;
+	char *op;
 	int total_read = 0;
 
-	while((c = read(0, tmp, 42)) > 0)
+	if(ac != 2)
+		return(1);
+
+	while((c = read(0, buffer, BUFFER_SIZE)) > 0)
 	{
 		i = 0;
-		buffer = realloc(result, total_read + c + 1);
-		if (!buffer)
+		op = realloc(result, total_read + c + 1);
+		if(!op)
 		{
-			perror("realloc");
 			free(result);
-			return (1);
+			perror("realloc");
+			return(1);
 		}
-		result = buffer;
+		result = op;
 		while(i < c)
 		{
-			result[total_read + i] = tmp[i];
+			result[total_read + i] = buffer[i];
 			i++;
 		}
 		total_read += c;
-		result[total_read] = '\0';++
+		result[total_read] = '\0';
 	}
-	if (c < 0)
+	result[total_read] = '\0';
+	if(c < 0)
 	{
 		perror("read");
-		free(result);
-		return 1;
+		return(1);
 	}
-	if (!result)
-		return(0);
-	ft_filter(result, av[1]);
+	filter(result, av[1]);
+	free(result);
 	return(0);
 }
+
