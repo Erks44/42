@@ -9,7 +9,7 @@ OBJS = megaphone.o
 all:
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
 clean:
-	rm $(OBJS)
+	rm -f $(OBJS)
 fclean: clean
 	rm $(NAME)
 re: fclean all
