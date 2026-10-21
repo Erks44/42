@@ -11,6 +11,10 @@ bool Contact::setContact()
     if (!std::getline(std::cin, firstName) || firstName.empty())
         return false;
 
+    std::cout << "Last name: ";
+    if (!std::getline(std::cin, lastName) || lastName.empty())
+        return false;
+
     std::cout << "Nickname: ";
     if (!std::getline(std::cin, nickname) || nickname.empty())
         return false;
