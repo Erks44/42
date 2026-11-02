@@ -1,4 +1,4 @@
-#include "Zombie.cpp"
+#include "Zombie.hpp"
 #include <iostream>
 
 Zombie::Zombie(std::string name)
@@ -8,10 +8,10 @@ Zombie::Zombie(std::string name)
 
 Zombie::~Zombie()
 {
-    std::cout << name << " destroyed" << stdl::end;
+    std::cout << name << " destroyed" << std::endl;
 }
 
-void Zombie::anounce(void)
+void Zombie::announce(void)
 {
     std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
